@@ -1,0 +1,8 @@
+rootProject.name='spring-lms'
+
+include 'base-service'
+include 'course-catagory'
+include 'data-service'
+include 'eureka-service'
+include 'hystrix-service'
+include 'zuul-service'

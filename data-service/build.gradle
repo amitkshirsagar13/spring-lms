@@ -1,0 +1,28 @@
+jar {
+    baseName = 'data-service'
+    version = '0.1.0'
+}
+
+bootRepackage { enabled = false }
+
+dependencies {
+	compile('org.springframework.cloud:spring-cloud-starter')
+	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+	
+	compile('org.springframework.boot:spring-boot-starter-web')
+	// hystrix related imports....
+	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+
+	// swagger related imports....
+	compile "io.swagger:swagger-core:${swaggerVersion}"
+	compile "io.swagger:swagger-core:${swaggerVersion}:sources"
+	compile "io.swagger:swagger-models:${swaggerVersion}"
+	compile "io.swagger:swagger-models:${swaggerVersion}:sources"
+	compile "io.swagger:swagger-annotations:$swaggerAnnotationsVersion"
+	compile "io.springfox:springfox-swagger2:$springfoxVersion"
+	compile "io.springfox:springfox-swagger-ui:$springfoxVersion"
+	
+	// not required absolutely...
+	compile project(':base-service')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}

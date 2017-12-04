@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: local
+info:
+  component: Eureka Config Host
+    

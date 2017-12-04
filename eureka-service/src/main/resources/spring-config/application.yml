@@ -1,0 +1,59 @@
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+  user:
+    roles: ACTUATOR
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+
+management:
+  context-path: /admin
+  address: ${VHOSTNAME:${HOSTNAME:localhost.shinigami.io}}
+  security:
+    enabled: false
+    
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${VCONFIGUSER:config}:${VCONFIGPASSWORD:password}@${VCONFIGHOST:${HOSTNAME:localhost.shinigami.io}}:${VCONFIGPORT:8761}/eureka/
+    registerWithEureka: true
+    fetchRegistry: false
+  instance:
+    instanceId: ${VHOSTNAME:${HOSTNAME:localhost.shinigami.io}}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+    hostname: ${VHOSTNAME:${HOSTNAME:localhost.shinigami.io}}
+    non-secure-port: ${spring.application.instance_id:${server.port}}
+    secure-port: ${spring.application.instance_id:${server.port}}
+    statusPageUrlPath: ${management.context-path}/info
+    healthCheckUrlPath: ${management.context-path}/health
+    leaseRenewalIntervalInSeconds: 5
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: WARN
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+      circuitBreaker:
+        requestVolumeThreshold: 4
+        errorThresholdPercentage: 50
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 10000
+          numBuckets: 10
+  threadpool:
+    default:
+      coreSize: 4
+      maxQueueSize: 8
+      queueSizeRejectionThreshold: 5

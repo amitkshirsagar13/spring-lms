@@ -1,0 +1,49 @@
+version: '3.0'
+#System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "");
+volumes:
+  data-jenkins:
+    driver: local
+services:
+  jenkins:
+    image: jenkinsci/jenkins
+    hostname: localjenkins
+    environment:
+      JAVA_OPTS: "-Dhudson.model.DirectoryBrowserSupport.CSP="
+    links:
+      - seleniumhub
+    ports:
+      - 8080:8080
+    restart: always
+    extra_hosts:
+      - seleniumhub:192.168.99.100
+  seleniumhub:
+    image: selenium/hub:latest
+    hostname: seleniumhub
+    ports:
+    - 4444:4444
+  firefoxnode:
+    image: selenium/node-firefox
+    privileged: true
+    hostname: firefoxnode
+    ports:
+    - 5902
+    environment:
+    - HUB_PORT_4444_TCP_ADDR=seleniumhub
+    - HUB_PORT_4444_TCP_PORT=4444
+    - NODE_MAX_INSTANCES=10
+    - NODE_MAX_SESSION=4
+    links:
+    - seleniumhub:hub
+  chromenode:
+    image: selenium/node-chrome
+    privileged: true
+    hostname: chromenode
+    ports:
+    - 5903
+    environment:
+    - HUB_PORT_4444_TCP_ADDR=seleniumhub
+    - HUB_PORT_4444_TCP_PORT=4444
+    - NODE_MAX_INSTANCES=10
+    - NODE_MAX_SESSION=4
+    links:
+    - seleniumhub:hub

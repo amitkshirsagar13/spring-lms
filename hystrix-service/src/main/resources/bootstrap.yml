@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: hystrix
+  profiles:
+    active: local
+  cloud:
+    config:
+      username: config
+      password: password
+      name: ${spring.application.name}
+      label: master
+      profile: local 
+      uri: http://${VCONFIGHOST:${HOSTNAME:localhost.shinigami.io}}:${VCONFIGPORT:8761}/config/

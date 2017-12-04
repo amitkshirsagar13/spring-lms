@@ -1,0 +1,8 @@
+info:
+  component: Zuul Service
+server:
+  hostname: localhost
+  port: 9999
+security:
+  basic:
+    enabled: false

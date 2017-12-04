@@ -1,0 +1,112 @@
+version: '2.1'
+services:
+  mongo:
+    image: mongo:latest
+    hostname: localmongo
+    ports:
+      - 27072:27017
+  activemq:
+    image: webcenter/activemq:latest
+    hostname: localmq
+    ports:
+      - 62626:61616
+    depends_on:
+      mongo:
+        condition: service_started
+  eureka:
+    image: microdocker/eureka-service:latest
+    restart: on-failure:7
+    hostname: localeureka
+    ports:
+      - 8761:8761
+    environment:
+      - spring.profiles.active=development
+    depends_on:
+      activemq:
+        condition: service_started
+    volumes:
+      - /shared/eureka:/tmp
+  zuul:
+    image: microdocker/zuul-service:latest
+    restart: on-failure:7
+    hostname: localzuul
+    ports:
+      - 9999:9999
+    environment:
+      - EUREKACONFIG=localeureka
+      - spring.profiles.active=development
+    extra_hosts:
+      - "localeureka:192.168.99.100"
+      - "localhystrix:192.168.99.100"
+    links:
+      - eureka
+    depends_on:
+      eureka:
+        condition: service_started
+    volumes:
+      - /shared/transform:/tmp
+  transform:
+    image: microdocker/transform-service:latest
+    restart: on-failure:7
+    hostname: localtransform
+    ports:
+      - 3333:3333
+    environment:
+      - EUREKACONFIG=localeureka
+      - spring.profiles.active=development
+    extra_hosts:
+      - "localeureka:192.168.99.100"
+      - "localmongo:192.168.99.100"
+      - "localmq:192.168.99.100"
+    links:
+      - activemq
+      - mongo
+      - eureka
+    depends_on:
+      zuul:
+        condition: service_started
+    volumes:
+    - /shared/transform:/tmp
+  webhook:
+    image: microdocker/webhook-service:latest
+    restart: on-failure:7
+    hostname: localwebhook
+    ports:
+      - 2222:2222
+    environment:
+      - EUREKACONFIG=localeureka
+      - spring.profiles.active=development
+    extra_hosts:
+      - "localeureka:192.168.99.100"
+      - "localmongo:192.168.99.100"
+      - "localmq:192.168.99.100"
+    links:
+      - activemq
+      - mongo
+      - eureka
+    depends_on:
+      transform:
+        condition: service_started
+    volumes:
+      - /shared/webhook:/tmp
+  hystrix:
+    image: microdocker/hystrix-service:latest
+    restart: on-failure:7
+    hostname: localhystrix
+    ports:
+      - 1234:1234
+    environment:
+      - EUREKACONFIG=localeureka
+      - spring.profiles.active=development
+    extra_hosts:
+      - "localeureka:192.168.99.100"
+      - "localzuul:192.168.99.100"
+      - "localwebhook:192.168.99.100"
+      - "localtransform:192.168.99.100"
+    links:
+      - eureka
+    depends_on:
+      eureka:
+        condition: service_started
+    volumes:
+    - /shared/hytrix:/tmp

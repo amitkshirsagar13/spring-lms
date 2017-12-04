@@ -1,0 +1,14 @@
+jar {
+	baseName = 'eureka-service'
+	version = '0.1.0'
+}
+
+springBoot {
+	mainClass="io.lms.eureka.application.EurekaApplication"
+}
+
+dependencies {
+	compile('org.springframework.cloud:spring-cloud-starter')
+	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+	compile('org.springframework.cloud:spring-cloud-config-server')
+}

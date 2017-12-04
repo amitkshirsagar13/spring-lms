@@ -1,0 +1,12 @@
+jar {
+    baseName = 'course-catagory'
+    version = '0.1.0'
+}
+
+springBoot {
+	mainClass="io.lms.micro.zuul.CourseCatagory"
+}
+
+dependencies {
+	compile project(':data-service')
+}

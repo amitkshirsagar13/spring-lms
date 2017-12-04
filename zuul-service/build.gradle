@@ -1,0 +1,13 @@
+jar {
+    baseName = 'zuul-service'
+    version = '0.1.0'
+}
+
+springBoot {
+	mainClass="io.lms.micro.zuul.ZuulServer"
+}
+
+dependencies {
+	compile('org.springframework.cloud:spring-cloud-starter-zuul')
+	compile('com.netflix.zuul:zuul-core')
+}
