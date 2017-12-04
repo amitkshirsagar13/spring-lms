@@ -52,7 +52,12 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.antMatcher("/**").authorizeRequests().anyRequest().hasAnyRole("USER").and().httpBasic();
+		/**
+		 * Swagger UI calls dont work because of single quotes headers. if changed to
+		 * double quotes should work.
+		 */
+		http.csrf().disable().cors().disable().antMatcher("/**").authorizeRequests().anyRequest().hasAnyRole("USER")
+				.and().httpBasic();
 		http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
 	}
 
@@ -65,7 +70,8 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
 	public FilterRegistrationBean filterRegistrationBean() {
 		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
 		registrationBean.setFilter(authFilter);
-		registrationBean.setEnabled(false);
+		registrationBean.setEnabled(true);
+		registrationBean.addUrlPatterns("/api/**");
 		return registrationBean;
 	}
 

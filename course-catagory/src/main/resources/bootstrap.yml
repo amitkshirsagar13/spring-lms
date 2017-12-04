@@ -1,6 +1,6 @@
 spring:
   application:
-    name: zuul
+    name: course-catagory
   profiles:
     active: local
   cloud:

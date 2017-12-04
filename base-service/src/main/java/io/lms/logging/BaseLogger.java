@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 
 public class BaseLogger {
 
-	//@ApiModelProperty(required = false, hidden = true)
+	// @ApiModelProperty(required = false, hidden = true)
 	Logger logger = Logger.getLogger(this.getClass());
 
 	public void logDebug(Object message) {
@@ -47,6 +47,10 @@ public class BaseLogger {
 
 	public void logError(Object message) {
 		logger.error(message);
+	}
+
+	public void logWarn(Object message) {
+		logger.warn(message);
 	}
 
 	public void logError(Object message, Throwable t) {

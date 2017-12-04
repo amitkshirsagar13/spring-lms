@@ -90,15 +90,22 @@ public abstract class AbstractRepositoryImpl<PK extends Serializable, T> extends
 		persistToMongo(entity);
 	}
 
-	public List<T> getEntityForProcessing() {
+	public List<T> getEntityForProcessing(Query searchUserQuery) {
 		List<T> entityList = new ArrayList<>();
-		if (getMongoOperations() != null) {
-			Criteria criteria = new Criteria().orOperator(Criteria.where("status").is("failure"),
-					Criteria.where("status").exists(false));
-			Query searchUserQuery = new Query(criteria);
+		if (searchUserQuery != null) {
 			entityList = getMongoOperations().find(searchUserQuery, persistentClass, getCollectionName());
+		} else {
+			logWarn("Query with null criteria for .... " + getCollectionName());
 		}
 		return entityList;
 	}
 
+	public BaseEntity find(BaseEntity baseEntity) {
+		Query searchUserQuery = null;
+		if (getMongoOperations() != null) {
+			Criteria criteria = new Criteria().is(Criteria.where("_id")).is(baseEntity.getId());
+			searchUserQuery = new Query(criteria);
+		}
+		return (BaseEntity) getMongoOperations().findOne(searchUserQuery, persistentClass, getCollectionName());
+	}
 }

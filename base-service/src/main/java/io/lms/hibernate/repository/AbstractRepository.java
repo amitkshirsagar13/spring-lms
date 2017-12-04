@@ -22,7 +22,7 @@ import org.apache.camel.Exchange;
  * </pre>
  */
 
-public interface AbstractRepository {
+public interface AbstractRepository<T> {
 
 	public String getCollectionName();
 

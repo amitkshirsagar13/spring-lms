@@ -6,6 +6,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
+import org.springframework.data.annotation.Id;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.lms.hibernate.PersistModifiable;
@@ -34,6 +36,20 @@ import io.swagger.annotations.ApiModelProperty;
 @MappedSuperclass
 public class BaseEntity extends Entity implements PersistModifiable {
 
+	@Id
+	@ApiModelProperty(required = false, hidden = true)
+	private String id;
+
+	private String recordId;
+
+	public String getRecordId() {
+		return id;
+	}
+
+	public void setRecordId(String recordId) {
+		// this.recordId = recordId;
+	}
+
 	@ApiModelProperty(required = false, hidden = true)
 	private String status;
 
@@ -58,6 +74,7 @@ public class BaseEntity extends Entity implements PersistModifiable {
 		this.createdDate = createdDate;
 	}
 
+	@Override
 	public boolean isDeleted() {
 		return this.deleted;
 	}
@@ -102,6 +119,21 @@ public class BaseEntity extends Entity implements PersistModifiable {
 	public BaseEntity setStatus(String status) {
 		this.status = status;
 		return this;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

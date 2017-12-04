@@ -1,4 +1,4 @@
-package io.lms.micro;
+package io.lms.micro.catagory;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +14,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 
  * 
  * <pre>
- * &#64;projectName base-service
- * Creation date: Dec 1, 2017
+ * &#64;projectName course-catagory
+ * Creation date: Dec 4, 2017
  * &#64;author Amit Kshirsagar
  * &#64;version 1.0
  * &#64;since
@@ -27,8 +27,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-@ComponentScan({ "io.lms.micro" })
-public class BaseServiceConfiguration extends SwaggerConfiguration {
+@ComponentScan({ "io.lms.micro.catagory" })
+public class CourseCatagoryConfiguration extends SwaggerConfiguration {
 
 	/*
 	 * (non-Javadoc)
@@ -37,7 +37,8 @@ public class BaseServiceConfiguration extends SwaggerConfiguration {
 	 */
 	@Override
 	public ApiInfo apiInfo() {
-		return apiInfoBuilder().title("base micro").description("base micro").version("1.0").build();
+		return apiInfoBuilder().title("Course Catagory MicroService")
+				.description("Course Catagory MicroService for handling Course Catagories").version("1.0").build();
 	}
 
 }

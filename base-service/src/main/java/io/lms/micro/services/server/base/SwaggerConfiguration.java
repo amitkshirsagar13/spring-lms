@@ -1,5 +1,8 @@
 package io.lms.micro.services.server.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -17,7 +20,11 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -44,12 +51,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @RefreshScope
 @Configuration
 @EnableSwagger2
-@ComponentScan({ "io.lms.jms", "io.lms.jms.queue", "io.lms.micro.services.web.swagger",
-		"io.lms.model", "io.lms.hibernate", "io.lms.hibernate.aop",
-		"io.lms.hibernate.repository" })
+@ComponentScan({ "io.lms.jms", "io.lms.jms.queue", "io.lms.micro.services.web.swagger", "io.lms.model",
+		"io.lms.hibernate", "io.lms.hibernate.aop", "io.lms.hibernate.repository" })
 @Import(io.lms.hystrix.HystrixConfiguration.class)
 @EnableConfigurationProperties
-public class SwaggerConfiguration extends WebMvcConfigurerAdapter {
+public abstract class SwaggerConfiguration extends WebMvcConfigurerAdapter {
 
 	@Value("${server.port}")
 	int port;
@@ -69,24 +75,54 @@ public class SwaggerConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public Docket api() {
-		// if (hostname == null) {
-		// hostname = environment.getProperty("server.hostname");
-		// port = environment.getProperty("server.port", Integer.class);
-		// }
-
 		return new Docket(DocumentationType.SWAGGER_2).groupName("All").select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.regex("/api/*/.*")).build().apiInfo(apiInfo()).forCodeGeneration(true)
-				.host(getHostname() + ":" + getPort());
+				.paths(PathSelectors.regex("/api/*/.*")).build().apiInfo(apiInfo())
+				.securitySchemes(newArrayList(apiKey())).securityContexts(newArrayList(securityContext()))
+				.forCodeGeneration(true).host(getHostname() + ":" + getPort());
 	}
 
-	private ApiInfo apiInfo() {
+	private ApiKey apiKey() {
+		return new ApiKey("Authorization", "Authorization", "header");
+	}
+
+	private SecurityContext securityContext() {
+		return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.regex("/api/*/.*"))
+				.build();
+	}
+
+	private <T> List<T> newArrayList(T something) {
+		List<T> list = new ArrayList<T>();
+		list.add(something);
+
+		return list;
+	}
+
+	List<SecurityReference> defaultAuth() {
+		AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+		authorizationScopes[0] = authorizationScope;
+		return newArrayList(new SecurityReference("Authorization", authorizationScopes));
+	}
+	//
+	// @Bean
+	// SecurityConfiguration security() {
+	// return new SecurityConfiguration(null, null, null, // realm Needed for
+	// authenticate button to work
+	// null, // appName Needed for authenticate button to work
+	// null, // apiKeyValue
+	// ApiKeyVehicle.HEADER, "Authorization", // apiKeyName
+	// null);
+	// }
+
+	public abstract ApiInfo apiInfo();
+
+	public ApiInfoBuilder apiInfoBuilder() {
 		Contact contact = new Contact();
 		contact.setName("Amit Kshirsagar");
 		contact.setEmail("akshirsa@gmail.com");
 
-		return new ApiInfoBuilder().title("DataSync micro").description("Datasync micro").version("1.0")
-				.termsOfServiceUrl("https://" + getHostname() + ":" + getPort() + "/v3").license("LICENSE")
-				.licenseUrl("https://" + getHostname() + ":" + getPort() + "/v3").build();
+		return new ApiInfoBuilder().termsOfServiceUrl("https://" + getHostname() + ":" + getPort() + "/v3")
+				.license("LICENSE").licenseUrl("https://" + getHostname() + ":" + getPort() + "/v3");
 	}
 
 	/**

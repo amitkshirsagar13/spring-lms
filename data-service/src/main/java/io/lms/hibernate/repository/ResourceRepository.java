@@ -2,9 +2,6 @@ package io.lms.hibernate.repository;
 
 import java.util.List;
 
-import io.lms.model.KinesisMessage;
-import io.lms.model.workorder.WorkOrder;
-
 /**
  * <p>
  * <b>Overview:</b>
@@ -25,11 +22,12 @@ import io.lms.model.workorder.WorkOrder;
  * </pre>
  */
 
-public interface WorkOrderRepository extends AbstractRepository {
+public interface ResourceRepository<T> extends AbstractRepository {
 
-	public void saveWorkOrder(KinesisMessage<WorkOrder> workOrder);
+	public void saveResource(T resource);
 
-	public void updateWorkOrder(KinesisMessage<WorkOrder> workOrder);
+	public void updateResource(T resource);
 
-	public List<KinesisMessage> getWorkOrdersForProcessing();
+	public List<T> getResourceList(String id, String name, String metakey, String owner, boolean enabled,
+			boolean deleted);
 }
