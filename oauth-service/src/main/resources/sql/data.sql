@@ -5,7 +5,7 @@ INSERT INTO authority VALUES (2, 'role_user');
 INSERT INTO credentials VALUES (0, 1, 'oauth_admin', 'admin', 0);
 INSERT INTO credentials VALUES (1, 1, 'resource_admin', 'admin', 0);
 INSERT INTO credentials VALUES (2, 1, 'user', 'user', 0);
-INSERT INTO credentials VALUES (3, 1, 'config', 'admin', 0);
+INSERT INTO credentials VALUES (3, 1, 'config', 'password', 0);
 INSERT INTO credentials_authorities VALUES (0, 0);
 INSERT INTO credentials_authorities VALUES (1, 1);
 INSERT INTO credentials_authorities VALUES (2, 2);
