@@ -10,7 +10,6 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -61,26 +60,6 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter implements Application
 		return resolver;
 	}
 
-	@Bean
-	public ViewResolver javascriptViewResolver() {
-		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-		resolver.setTemplateEngine(templateEngine(javascriptTemplateResolver()));
-		resolver.setContentType("application/javascript");
-		resolver.setCharacterEncoding("UTF-8");
-		resolver.setViewNames(ArrayUtil.array("*.js"));
-		return resolver;
-	}
-
-	@Bean
-	public ViewResolver plainViewResolver() {
-		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-		resolver.setTemplateEngine(templateEngine(plainTemplateResolver()));
-		resolver.setContentType("text/plain");
-		resolver.setCharacterEncoding("UTF-8");
-		resolver.setViewNames(ArrayUtil.array("*.txt"));
-		return resolver;
-	}
-
 	private TemplateEngine templateEngine(ITemplateResolver templateResolver) {
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.addDialect(new Java8TimeDialect());
@@ -92,27 +71,9 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter implements Application
 	private ITemplateResolver htmlTemplateResolver() {
 		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
 		resolver.setApplicationContext(applicationContext);
-		resolver.setPrefix("/WEB-INF/templates/");
+		resolver.setPrefix("/templates");
 		resolver.setCacheable(false);
 		resolver.setTemplateMode(TemplateMode.HTML);
-		return resolver;
-	}
-
-	private ITemplateResolver javascriptTemplateResolver() {
-		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-		resolver.setApplicationContext(applicationContext);
-		resolver.setPrefix("/WEB-INF/static/");
-		resolver.setCacheable(false);
-		resolver.setTemplateMode(TemplateMode.JAVASCRIPT);
-		return resolver;
-	}
-
-	private ITemplateResolver plainTemplateResolver() {
-		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-		resolver.setApplicationContext(applicationContext);
-		resolver.setPrefix("/WEB-INF/static/");
-		resolver.setCacheable(false);
-		resolver.setTemplateMode(TemplateMode.TEXT);
 		return resolver;
 	}
 
@@ -141,11 +102,6 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter implements Application
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
-	}
-
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
 	}
 
 }
