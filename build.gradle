@@ -55,6 +55,10 @@ subprojects {
 		
 		compile('org.springframework.boot:spring-boot-starter-aop')
 		
+		compile("org.springframework.security.oauth:spring-security-oauth2:${springSecurityOauth2}")
+	    compile("org.springframework.security:spring-security-jwt")
+	    compile("org.xerial:sqlite-jdbc:3.7.2")
+		
     	testCompile('org.springframework.boot:spring-boot-starter-test')
 	}
 	

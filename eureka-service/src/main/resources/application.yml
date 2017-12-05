@@ -16,7 +16,17 @@ management:
   address: ${VHOSTNAME:${HOSTNAME:localhost.shinigami.io}}
   security:
     enabled: false
-    
+
+
+spring.jta.transaction-manager-id: oauthserver1
+spring.jta.log-dir: o-transaction-logs
+
+spring.thymeleaf.cache: false
+error.whitelabel.enabled: false
+
+keystore:
+  password: secretit
+
 eureka:
   client:
     serviceUrl:
@@ -41,6 +51,12 @@ spring:
         prefix: /config
         git:
           uri: file:///opt/github/MicroDocker/spring-config
+  datasource:
+    url: jdbc:sqlite:C:/opt/tokens.db
+    schema: classpath:/sql/schema.sql
+    data: classpath:/sql/data.sql
+    
+jdbc.driver: org.sqlite.JDBC
 ---
 spring:
   profiles: native
