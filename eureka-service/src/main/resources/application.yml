@@ -1,12 +1,14 @@
 spring.profiles.active: native
-
+info:
+  component: Cloud Config Server
+  
 server:
   display-name: CloudConfigServer
   port: 8761
 
 security:
   basic:
-    enabled: false
+    enabled: true
   user:
       name: ${VCONFIGUSER:config}
       password: ${VCONFIGPASSWORD:password}
@@ -20,9 +22,6 @@ management:
 
 spring.jta.transaction-manager-id: oauthserver1
 spring.jta.log-dir: o-transaction-logs
-
-spring.thymeleaf.cache: false
-error.whitelabel.enabled: false
 
 keystore:
   password: secretit
