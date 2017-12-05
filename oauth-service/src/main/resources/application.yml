@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: native
+  thymeleaf:
+    cache: false
+error:
+  whitelabel:
+    enabled: false
