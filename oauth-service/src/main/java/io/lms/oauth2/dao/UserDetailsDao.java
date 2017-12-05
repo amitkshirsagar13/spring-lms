@@ -54,8 +54,8 @@ public class UserDetailsDao implements UserDetailsService {
 					authorities.add(new SimpleGrantedAuthority(user.get("authority").asString()));
 					return user;
 				})
-				.map(user -> new User(user.get("name").asString(), user.get("password").asString(),
-						user.get("enabled").as(Boolean.class), true, true, true, authorities))
+				.map(user -> new User(user.get("name").asString(), user.get("password").asString(), true, true, true,
+						true, authorities)) // user.get("enabled").as(Boolean.class)
 				.findFirst().orElseThrow(() -> new UsernameNotFoundException(""));
 	}
 

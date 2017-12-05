@@ -31,6 +31,11 @@ public class OAuth2Controller {
 		return "login";
 	}
 
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String root(Model model) {
+		return "login";
+	}
+
 	@RequestMapping(value = "/error", method = RequestMethod.GET)
 	public String error(Model model) {
 		return "error";
