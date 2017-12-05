@@ -33,7 +33,7 @@ public class OAuth2Controller {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String root(Model model) {
-		return "login";
+		return "test";
 	}
 
 	@RequestMapping(value = "/error", method = RequestMethod.GET)
