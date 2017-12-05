@@ -1,4 +1,13 @@
-spring.profiles.active: native
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        prefix: /config
+        git:
+          uri: file:///opt/github/MicroDocker/spring-config
+
 info:
   component: Cloud Config Server
   
@@ -20,12 +29,6 @@ management:
     enabled: false
 
 
-spring.jta.transaction-manager-id: oauthserver1
-spring.jta.log-dir: o-transaction-logs
-
-keystore:
-  password: secretit
-
 eureka:
   client:
     serviceUrl:
@@ -41,25 +44,9 @@ eureka:
     healthCheckUrlPath: ${management.context-path}/health
     leaseRenewalIntervalInSeconds: 5
 
-spring:
-  cloud:
-    config:
-      discovery:
-        enabled: true
-      server:
-        prefix: /config
-        git:
-          uri: file:///opt/github/MicroDocker/spring-config
-  datasource:
-    url: jdbc:sqlite:C:/opt/tokens.db
-    schema: classpath:/sql/schema.sql
-    data: classpath:/sql/data.sql
-    
-jdbc.driver: org.sqlite.JDBC
 ---
 spring:
   profiles: native
-  
   cloud:
     config:
       server:

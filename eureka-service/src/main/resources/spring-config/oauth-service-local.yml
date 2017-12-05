@@ -1,0 +1,34 @@
+info:
+  component: Cloud OAuth2 Server
+  
+server:
+  display-name: CloudOAuth2Server
+  port: 5001
+
+security:
+  basic:
+    enabled: false
+  user:
+      name: ${VCONFIGUSER:config}
+      password: ${VCONFIGPASSWORD:password}
+
+management:
+  context-path: /admin
+  address: ${VHOSTNAME:${HOSTNAME:localhost.shinigami.io}}
+  security:
+    enabled: true
+
+spring.jta.transaction-manager-id: oauthserver1
+spring.jta.log-dir: o-transaction-logs
+
+keystore:
+  password: secretit
+
+spring:
+  datasource:
+    url: jdbc:sqlite:C:/opt/tokens.db
+    schema: classpath:/sql/schema.sql
+    data: classpath:/sql/data.sql
+    
+jdbc.driver: org.sqlite.JDBC
+    
