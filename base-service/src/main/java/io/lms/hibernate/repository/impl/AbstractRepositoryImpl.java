@@ -5,7 +5,6 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.camel.Exchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -14,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import io.lms.hibernate.repository.AbstractRepository;
 import io.lms.logging.BaseLogger;
 import io.lms.model.BaseEntity;
-import io.lms.model.Response;
 
 /**
  * <p>
@@ -70,25 +68,27 @@ public abstract class AbstractRepositoryImpl<PK extends Serializable, T> extends
 		}
 	}
 
-	@Override
-	public void markSuccessFailEntity(Exchange exchange) {
-		Response entity = (Response) exchange.getIn().getBody();
-		logDebug("Saving Camel Route Identity markSuccessFailEntity...." + ((BaseEntity) entity).toStringNoPretty());
-		if (entity.getStatus().equalsIgnoreCase("success")) {
-			((BaseEntity) entity.getPayload()).setStatus("success");
-		} else {
-			((BaseEntity) entity.getPayload()).setStatus("failure");
-		}
-		persistToMongo((T) entity.getPayload());
-	}
+	// @Override
+	// public void markSuccessFailEntity(Exchange exchange) {
+	// Response entity = (Response) exchange.getIn().getBody();
+	// logDebug("Saving Camel Route Identity markSuccessFailEntity...." +
+	// ((BaseEntity) entity).toStringNoPretty());
+	// if (entity.getStatus().equalsIgnoreCase("success")) {
+	// ((BaseEntity) entity.getPayload()).setStatus("success");
+	// } else {
+	// ((BaseEntity) entity.getPayload()).setStatus("failure");
+	// }
+	// persistToMongo((T) entity.getPayload());
+	// }
 
-	@Override
-	public void markProcessingEntity(Exchange exchange) {
-		T entity = (T) exchange.getIn().getBody();
-		((BaseEntity) entity).setStatus("processing");
-		logDebug("Saving Camel Route Identity markProcessingEntity...." + ((BaseEntity) entity).toStringNoPretty());
-		persistToMongo(entity);
-	}
+	// @Override
+	// public void markProcessingEntity(Exchange exchange) {
+	// T entity = (T) exchange.getIn().getBody();
+	// ((BaseEntity) entity).setStatus("processing");
+	// logDebug("Saving Camel Route Identity markProcessingEntity...." +
+	// ((BaseEntity) entity).toStringNoPretty());
+	// persistToMongo(entity);
+	// }
 
 	public List<T> getEntityForProcessing(Query searchUserQuery) {
 		List<T> entityList = new ArrayList<>();

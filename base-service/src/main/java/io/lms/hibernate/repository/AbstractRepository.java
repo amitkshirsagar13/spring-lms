@@ -1,7 +1,5 @@
 package io.lms.hibernate.repository;
 
-import org.apache.camel.Exchange;
-
 /**
  * <p>
  * <b>Overview:</b>
@@ -28,7 +26,7 @@ public interface AbstractRepository<T> {
 
 	public void cleanup();
 
-	public void markSuccessFailEntity(Exchange exchange);
+	// public void markSuccessFailEntity(Exchange exchange);
 
-	public void markProcessingEntity(Exchange exchange);
+	// public void markProcessingEntity(Exchange exchange);
 }

@@ -38,7 +38,7 @@ public class BaseBasicAuthenticationFilter extends GenericFilterBean {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		logger.info("Authentication Chain filter....");
+		// logger.info("Authentication Chain filter....");
 		chain.doFilter(request, response);
 	}
 

@@ -2,7 +2,6 @@ package io.lms.hibernate.aop;
 
 import java.util.Date;
 
-import org.apache.camel.Exchange;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -59,7 +58,8 @@ public class MongoRepositoryInterceptor extends BaseLogger {
 	public void beforeStatusEntity(JoinPoint joinPoint) {
 		logJoinPoints(joinPoint);
 		if (joinPoint != null && joinPoint.getArgs() != null) {
-			((BaseEntity) ((Exchange) joinPoint.getArgs()[0]).getIn().getBody()).setUpdatedDate(new Date());
+			// ((BaseEntity) ((Exchange)
+			// joinPoint.getArgs()[0]).getIn().getBody()).setUpdatedDate(new Date());
 		}
 	}
 
