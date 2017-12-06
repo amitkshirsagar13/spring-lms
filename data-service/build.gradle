@@ -11,18 +11,6 @@ dependencies {
 	// hystrix related imports....
 	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
 
-	// swagger related imports....
-	compile "io.swagger:swagger-core:${swaggerVersion}"
-	compile "io.swagger:swagger-core:${swaggerVersion}:sources"
-	compile "io.swagger:swagger-models:${swaggerVersion}"
-	compile "io.swagger:swagger-models:${swaggerVersion}:sources"
-	compile "io.swagger:swagger-annotations:${swaggerVersion}"
-	compile "io.swagger:swagger-annotations:${swaggerVersion}:sources"
-	compile "io.springfox:springfox-swagger2:${springfoxVersion}"
-	compile "io.springfox:springfox-swagger2:${springfoxVersion}:sources"
-	compile "io.springfox:springfox-swagger-ui:${springfoxVersion}"
-	compile "io.springfox:springfox-swagger-ui:${springfoxVersion}:sources"
-	
 	compile project(':base-service')
 	
     testCompile('org.springframework.boot:spring-boot-starter-test')

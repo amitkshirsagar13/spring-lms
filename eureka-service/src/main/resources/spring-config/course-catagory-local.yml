@@ -9,3 +9,6 @@ security:
   user:
     name: course
     password: password
+  oauth2:
+    resource:
+      service-id: course-service

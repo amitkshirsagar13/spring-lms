@@ -35,7 +35,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @EnableResourceServer
 @EnableWebSecurity
 @EnableConfigurationProperties
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+public class BaseResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private Environment environment;
 
@@ -45,12 +45,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Value("${security.user.password}")
 	private String password;
 
-	// @Autowired
-	// public void configureGlobal(final AuthenticationManagerBuilder
-	// authManagerBuilder) throws Exception {
-	// authManagerBuilder.inMemoryAuthentication().withUser(userName).password(password).roles("ROLE");
-	// }
-
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().cors().disable().authorizeRequests()
@@ -59,8 +53,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
+	@Value("${security.oauth2.resource.service-id}")
+	private String resourceId;
+
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-		resources.resourceId("course-service");
+		resources.resourceId(resourceId);
 	}
 }

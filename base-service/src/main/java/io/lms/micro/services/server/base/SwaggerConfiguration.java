@@ -91,7 +91,7 @@ public abstract class SwaggerConfiguration extends WebMvcConfigurerAdapter {
 	}
 
 	private <T> List<T> newArrayList(T something) {
-		List<T> list = new ArrayList<T>();
+		List<T> list = new ArrayList<>();
 		list.add(something);
 
 		return list;
@@ -103,15 +103,11 @@ public abstract class SwaggerConfiguration extends WebMvcConfigurerAdapter {
 		authorizationScopes[0] = authorizationScope;
 		return newArrayList(new SecurityReference("Authorization", authorizationScopes));
 	}
-	//
+
 	// @Bean
 	// SecurityConfiguration security() {
-	// return new SecurityConfiguration(null, null, null, // realm Needed for
-	// authenticate button to work
-	// null, // appName Needed for authenticate button to work
-	// null, // apiKeyValue
-	// ApiKeyVehicle.HEADER, "Authorization", // apiKeyName
-	// null);
+	// return new SecurityConfiguration(null, null, null, null, "apiKey",
+	// ApiKeyVehicle.HEADER, "Authorization", ",");
 	// }
 
 	public abstract ApiInfo apiInfo();
