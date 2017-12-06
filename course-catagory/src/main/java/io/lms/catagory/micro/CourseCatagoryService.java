@@ -2,7 +2,6 @@ package io.lms.catagory.micro;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.lms.course.hibernate.CourseCatagoryRepository;
@@ -27,9 +26,10 @@ import io.lms.course.model.CourseCatagory;
  * </pre>
  */
 @Component
+// @Import(CourseCatagoryRepository.class)
 public class CourseCatagoryService {
 
-	@Autowired
+	// @Autowired
 	private CourseCatagoryRepository courseCatagoryRepository;
 
 	public void saveCourseCatagory(CourseCatagory courseCatagory) {

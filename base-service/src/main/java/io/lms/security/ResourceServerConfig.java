@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -13,6 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
 /**
+ * 
  * <p>
  * <b>Overview:</b>
  * <p>
@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
  * 
  * <pre>
  * &#64;projectName base-service
- * Creation date: Dec 5, 2017
+ * Creation date: Dec 6, 2017
  * &#64;author Amit Kshirsagar
  * &#64;version 1.0
  * &#64;since
@@ -44,10 +44,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Value("${security.user.password}")
 	private String password;
 
-	@Autowired
-	public void configureGlobal(final AuthenticationManagerBuilder authManagerBuilder) throws Exception {
-		authManagerBuilder.inMemoryAuthentication().withUser(userName).password(password).roles("ROLE");
-	}
+	// @Autowired
+	// public void configureGlobal(final AuthenticationManagerBuilder
+	// authManagerBuilder) throws Exception {
+	// authManagerBuilder.inMemoryAuthentication().withUser(userName).password(password).roles("ROLE");
+	// }
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {

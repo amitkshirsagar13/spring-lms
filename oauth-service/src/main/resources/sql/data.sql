@@ -21,7 +21,7 @@ INSERT INTO oauth_client_details
 VALUES
   ('course', 'course-service', 'password', 
   'read,write,password,authorization_code,refresh_token','client_credentials', 'http://localhost.shinigami.io:6001/', 'role_admin', 
-  300, 300, 
+  3600, 3600, 
   null, 'true');
   
   

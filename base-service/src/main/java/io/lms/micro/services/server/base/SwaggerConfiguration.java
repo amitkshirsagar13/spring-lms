@@ -51,8 +51,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @RefreshScope
 @Configuration
 @EnableSwagger2
-@ComponentScan({ "io.lms.jms", "io.lms.jms.queue", "io.lms.micro.services.web.swagger", "io.lms.model",
-		"io.lms.hibernate", "io.lms.hibernate.aop", "io.lms.hibernate.repository" })
+@ComponentScan({ "io.lms.jms", "io.lms.jms.queue", "io.lms.micro.services.web.swagger", "io.lms.model", "io.lms.oauth2",
+		"io.lms.security", "io.lms.hibernate", "io.lms.hibernate.aop", "io.lms.hibernate.repository" })
 @Import(io.lms.hystrix.HystrixConfiguration.class)
 @EnableConfigurationProperties
 public abstract class SwaggerConfiguration extends WebMvcConfigurerAdapter {
