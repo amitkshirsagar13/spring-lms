@@ -7,9 +7,7 @@ bootRepackage { enabled = false }
 
 dependencies {
 	compile('org.springframework.cloud:spring-cloud-starter')
-	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
 	
-	compile('org.springframework.boot:spring-boot-starter-web')
 	// hystrix related imports....
 	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
 
@@ -25,7 +23,7 @@ dependencies {
 	compile "io.springfox:springfox-swagger-ui:${springfoxVersion}"
 	compile "io.springfox:springfox-swagger-ui:${springfoxVersion}:sources"
 	
-	// not required absolutely...
 	compile project(':base-service')
+	
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

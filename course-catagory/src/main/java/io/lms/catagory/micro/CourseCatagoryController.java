@@ -1,14 +1,15 @@
-package io.lms.micro.catagory;
+package io.lms.catagory.micro;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.lms.model.course.CourseCatagory;
+import io.lms.course.model.CourseCatagory;
 
 /**
  * <p>
@@ -35,6 +36,7 @@ public class CourseCatagoryController {
 	@Autowired
 	private CourseCatagoryService courseCatagoryService;
 
+	@PreAuthorize("#oauth2.hasScope('write')")
 	@RequestMapping(value = "/api/courseCatagory/save", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public List<CourseCatagory> save(@RequestBody final CourseCatagory courseCatagory) {
 		getCourseCatagoryService().saveCourseCatagory(courseCatagory);
@@ -42,6 +44,7 @@ public class CourseCatagoryController {
 		return getCourseCatagoryService().getCourseCatagoryList("string");
 	}
 
+	@PreAuthorize("#oauth2.hasScope('read')")
 	@RequestMapping(value = "/api/courseCatagory/list", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public List<CourseCatagory> list(String name) {
 		return getCourseCatagoryService().getCourseCatagoryList(name);

@@ -1,7 +1,7 @@
 info:
   component: Course Catagory Services
 server:
-  hostname: localhost
+  hostname: localhost.shinigami.io
   port: 6001
 security:
   basic:

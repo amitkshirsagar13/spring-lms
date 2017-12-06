@@ -1,12 +1,12 @@
-package io.lms.micro.catagory;
+package io.lms.catagory.micro;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.lms.hibernate.course.CourseCatagoryRepository;
-import io.lms.model.course.CourseCatagory;
+import io.lms.course.hibernate.CourseCatagoryRepository;
+import io.lms.course.model.CourseCatagory;
 
 /**
  * <p>

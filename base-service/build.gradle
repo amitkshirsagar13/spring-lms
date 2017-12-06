@@ -15,9 +15,6 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-activemq')
 	compile('org.springframework.boot:spring-boot-starter-aop')
 
-
-
-	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
 
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
@@ -30,7 +27,6 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile("com.github.alexheretic:dynamics:1.2")
 	compile("org.xerial:sqlite-jdbc:3.7.2")
-	compile("org.springframework.boot:spring-boot-devtools")
 	
 	// swagger related imports....
 	compile "io.swagger:swagger-core:${swaggerVersion}"

@@ -3,13 +3,14 @@ info:
   
 server:
   display-name: CloudOAuth2Server
+  hostname: localhost.shinigami.io
   port: 5001
 
 security:
   basic:
     enabled: false
   user:
-      name: ${VCONFIGUSER:config}
+      name: ${VCONFIGUSER:oauth2}
       password: ${VCONFIGPASSWORD:password}
 
 management:

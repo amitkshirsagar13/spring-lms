@@ -1,4 +1,4 @@
-package io.lms.model.course;
+package io.lms.course.model;
 
 import java.util.List;
 

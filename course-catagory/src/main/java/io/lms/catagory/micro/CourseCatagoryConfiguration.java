@@ -1,4 +1,4 @@
-package io.lms.micro.catagory;
+package io.lms.catagory.micro;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-@ComponentScan({ "io.lms.micro.catagory" })
+@ComponentScan({ "io.lms.catagory" })
 public class CourseCatagoryConfiguration extends SwaggerConfiguration {
 
 	/*

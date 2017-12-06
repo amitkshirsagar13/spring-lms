@@ -1,4 +1,4 @@
-package io.lms.micro.catagory;
+package io.lms.catagory.micro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,9 +37,7 @@ import io.lms.micro.BaseServiceConfiguration;
 @ComponentScan(useDefaultFilters = true, basePackages = {})
 @EnableResourceServer
 public class CourseCatagoryServer {
-
 	public static void main(String[] args) {
 		SpringApplication.run(CourseCatagoryServer.class, args);
 	}
-
 }

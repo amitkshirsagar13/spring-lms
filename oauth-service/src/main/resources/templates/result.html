@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
 <meta charset="utf-8" />
@@ -40,47 +41,33 @@
 
 	<!-- Top content -->
 	<div class="top-content">
-
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2 text">
+				<a href="logout.do">logout</a>
+			</div>
+		</div>
 		<div class="inner-bg">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 text">
 						<h1>
-							<strong>Provider</strong> Login Form
+							<strong>Greeting</strong> Results
 						</h1>
-
-						<div th:if="${param.error}">
-							<div class="alert alert-danger">Error logging in.</div>
-						</div>
-
-						<div th:if="${param.logout}">
-							<div class="alert alert-info">You have been logged out.</div>
-						</div>
 					</div>
 				</div>
 				<div class="row">
-					<!-- <div class="col-sm-6 col-sm-offset-3 form-box">
-						<input type="hidden" th:name="${_csrf.parameterName}"
-							th:value="${_csrf.token}" />
-					</div> -->
+					<div class="col-sm-6 col-sm-offset-3 form-box">
+						<div class="form-top">
+							<div class="form-top-left">
+								<h3>Result for something else...</h3>
+								<h1>Result</h1>
+								<p th:text="'id: ' + ${greeting.id}" />
+								<p th:text="'content: ' + ${greeting.content}" />
+								<a href="/home">Submit another message</a>
+							</div>
+						</div>
+					</div>
 				</div>
-				<!--<div class="row">-->
-				<!--<div class="col-sm-6 col-sm-offset-3 social-login">-->
-				<!--<h3>...or login with:</h3>-->
-
-				<!--<div class="social-login-buttons">-->
-				<!--<a class="btn btn-link-2" href="#">-->
-				<!--<i class="fa fa-facebook"></i> Facebook-->
-				<!--</a>-->
-				<!--<a class="btn btn-link-2" href="#">-->
-				<!--<i class="fa fa-twitter"></i> Twitter-->
-				<!--</a>-->
-				<!--<a class="btn btn-link-2" href="#">-->
-				<!--<i class="fa fa-google-plus"></i> Google Plus-->
-				<!--</a>-->
-				<!--</div>-->
-				<!--</div>-->
-				<!--</div>-->
 			</div>
 		</div>
 

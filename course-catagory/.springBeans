@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:io.lms.micro.catagory.CourseCatagoryServer</config>
+		<config>java:io.lms.catagory.micro.CourseCatagoryServer</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

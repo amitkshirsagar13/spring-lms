@@ -1,7 +1,7 @@
 info:
   component: Hystrix Turbine Dashboard
 server:
-  hostname: localhost
+  hostname: localhost.shinigami.io
   port: 1234
 security:
   basic:
