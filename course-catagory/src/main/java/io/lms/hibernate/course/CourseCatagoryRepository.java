@@ -1,4 +1,4 @@
-package io.lms.course.hibernate;
+package io.lms.hibernate.course;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import io.lms.course.model.CourseCatagory;
 import io.lms.hibernate.repository.ResourceRepository;
 import io.lms.hibernate.repository.impl.AbstractRepositoryImpl;
+import io.lms.model.course.CourseCatagory;
 
 /**
  * <p>

@@ -19,9 +19,9 @@ security:
        
 endpoints:
   restart:
-    enabled: false
+    enabled: true
   shutdown:
-    enabled: false
+    enabled: true
 
 management:
   context-path: /admin
