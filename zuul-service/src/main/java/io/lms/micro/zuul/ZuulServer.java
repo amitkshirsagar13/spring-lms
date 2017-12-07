@@ -2,6 +2,7 @@ package io.lms.micro.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.ComponentScan;
  * </pre>
  */
 @EnableZuulProxy
+@EnableDiscoveryClient
 @SpringBootApplication(exclude = { org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
 		org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class })
 @ComponentScan(useDefaultFilters = true, basePackages = { "io.lms.security", "io.lms.micro.zuul.filters" })

@@ -1,10 +1,9 @@
 package io.lms.controller;
 
-import io.lms.logging.BaseLogger;
-import io.lms.utils.BaseSystemUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.lms.logging.BaseLogger;
 
 /**
  * <p>
@@ -37,4 +36,14 @@ public class BaseController extends BaseLogger {
 
 		return "Hello Docker World: " + response;
 	}
+
+	// @RequestMapping(value = "/api/**", method = RequestMethod.OPTIONS)
+	// public void corsHeaders(HttpServletResponse response) {
+	// response.addHeader("Access-Control-Allow-Origin", "*");
+	// response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE,
+	// OPTIONS");
+	// response.addHeader("Access-Control-Allow-Headers", "origin, content-type,
+	// accept, x-requested-with");
+	// response.addHeader("Access-Control-Max-Age", "3600");
+	// }
 }

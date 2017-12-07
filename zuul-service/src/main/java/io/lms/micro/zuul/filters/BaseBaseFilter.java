@@ -1,5 +1,9 @@
 package io.lms.micro.zuul.filters;
 
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -61,9 +65,19 @@ public class BaseBaseFilter extends ZuulFilter {
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		HttpServletRequest request = ctx.getRequest();
-		log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
-		ctx.setDebugRouting(true);
-		ctx.setDebugRequest(true);
+		if (!request.getRequestURL().toString().contains("swagger")) {
+			Enumeration<String> headerNames = request.getHeaderNames();
+			Map<String, String> map = new HashMap<>();
+			while (headerNames.hasMoreElements()) {
+				String key = headerNames.nextElement();
+				String value = request.getHeader(key);
+				map.put(key, value);
+			}
+			log.info(String.format("Header details: %s", map.toString()));
+			log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
+			ctx.setDebugRouting(true);
+			ctx.setDebugRequest(true);
+		}
 		return null;
 	}
 

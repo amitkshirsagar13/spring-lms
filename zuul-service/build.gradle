@@ -10,4 +10,5 @@ springBoot {
 dependencies {
 	compile('org.springframework.cloud:spring-cloud-starter-zuul')
 	compile('com.netflix.zuul:zuul-core')
+	compile("org.springframework.boot:spring-boot-devtools")
 }
