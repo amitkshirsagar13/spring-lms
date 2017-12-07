@@ -6,3 +6,11 @@ server:
 security:
   basic:
     enabled: false
+    
+zuul:
+  routes:
+    course:
+      url: http://localhost.shinigami.io:6001
+ribbon:
+  eureka:
+    enabled: false

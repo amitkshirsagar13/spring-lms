@@ -5,8 +5,8 @@ spring:
     active: local
   cloud:
     config:
-      username: config
-      password: password
+      username: ${VCONFIGUSER:config}
+      password: ${VCONFIGPASSWORD:password}
       name: ${spring.application.name}
       label: master
       profile: local 
