@@ -5,8 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import io.lms.hibernate.course.CourseCatagoryRepository;
+import io.lms.model.Response;
 import io.lms.model.course.CourseCatagory;
+import io.lms.service.BaseService;
 
 /**
  * <p>
@@ -28,10 +32,19 @@ import io.lms.model.course.CourseCatagory;
  */
 @Component
 // @Import(CourseCatagoryRepository.class)
-public class CourseCatagoryService {
+public class CourseCatagoryService extends BaseService {
 
 	@Autowired
 	private CourseCatagoryRepository courseCatagoryRepository;
+
+	@HystrixCommand(fallbackMethod = "alternateControllerMethod", commandKey = "listCourseCatagory", groupKey = "CourseCatagoryController")
+	public Response listCourseCatagory(String name) throws Exception {
+		int r1 = (int) (Math.random() * 5) + 3;
+		if (r1 > 6) {
+			throw new Exception("Test Exception random in list");
+		}
+		return new Response().setPayload(getCourseCatagoryList(name));
+	}
 
 	public void saveCourseCatagory(CourseCatagory courseCatagory) {
 		getCourseCatagoryRepository().saveResource(courseCatagory);

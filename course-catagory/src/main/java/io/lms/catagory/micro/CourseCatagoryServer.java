@@ -2,13 +2,11 @@ package io.lms.catagory.micro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.stereotype.Controller;
 
 import io.lms.micro.BaseServiceConfiguration;
+import io.lms.micro.services.server.base.BaseServer;
 
 /**
  * <p>
@@ -29,14 +27,11 @@ import io.lms.micro.BaseServiceConfiguration;
  * 
  * </pre>
  */
-@EnableDiscoveryClient
-@EnableScheduling
 @Import(BaseServiceConfiguration.class)
+@Controller
 @SpringBootApplication(exclude = { org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
 		org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class })
-@ComponentScan(useDefaultFilters = true, basePackages = {})
-@EnableResourceServer
-public class CourseCatagoryServer {
+public class CourseCatagoryServer extends BaseServer {
 	public static void main(String[] args) {
 		SpringApplication.run(CourseCatagoryServer.class, args);
 	}

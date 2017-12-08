@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.lms.controller.BaseController;
+import io.lms.model.Response;
 import io.lms.model.course.CourseCatagory;
 
 /**
@@ -29,25 +31,23 @@ import io.lms.model.course.CourseCatagory;
  * 
  * </pre>
  */
-
 @RestController
-public class CourseCatagoryController {
+public class CourseCatagoryController extends BaseController {
 
 	@Autowired
 	private CourseCatagoryService courseCatagoryService;
 
 	@PreAuthorize("#oauth2.hasScope('write')")
 	@RequestMapping(value = "/api/courseCatagory/save", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-	public List<CourseCatagory> save(@RequestBody final CourseCatagory courseCatagory) {
+	public Response<List<CourseCatagory>> save(@RequestBody final CourseCatagory courseCatagory) throws Exception {
 		getCourseCatagoryService().saveCourseCatagory(courseCatagory);
-
-		return getCourseCatagoryService().getCourseCatagoryList("string");
+		return getCourseCatagoryService().listCourseCatagory(courseCatagory.getName());
 	}
 
 	@PreAuthorize("#oauth2.hasScope('read')")
 	@RequestMapping(value = "/api/courseCatagory/list", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-	public List<CourseCatagory> list(String name) {
-		return getCourseCatagoryService().getCourseCatagoryList(name);
+	public Response<List<CourseCatagory>> list(String name) throws Exception {
+		return getCourseCatagoryService().listCourseCatagory(name);
 	}
 
 	/**

@@ -5,7 +5,10 @@ spring:
         enabled: true
   user:
     roles: ACTUATOR
-    
+  rabbitmq:
+    host: ${rabbitmq.host:localhost.shinigami.io}
+
+
 oauth_db: jdbc:sqlite:C:/opt/tokens.db
 
 keystore:
@@ -63,6 +66,7 @@ hystrix:
         rollingStats:
           timeInMilliseconds: 10000
           numBuckets: 10
+          
   threadpool:
     default:
       coreSize: 4

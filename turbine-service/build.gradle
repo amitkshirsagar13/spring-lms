@@ -1,0 +1,14 @@
+jar {
+	baseName = 'turbine-service'
+	version = '0.1.0'
+}
+
+springBoot {
+	mainClass="io.lms.turbine.application.TurbineApplication"
+}
+
+dependencies {
+	// turbine related imports....
+	compile('org.springframework.cloud:spring-cloud-starter-turbine-stream')
+	compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+}

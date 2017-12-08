@@ -1,9 +1,5 @@
 package io.lms.micro.services.server.micro;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
 import io.lms.micro.services.server.base.BaseServer;
 
 /**
@@ -31,9 +27,9 @@ import io.lms.micro.services.server.base.BaseServer;
 // @PropertySources(value = {
 // @PropertySource("classpath:/application.properties") })
 public class MicroBaseServer extends BaseServer {
-	@Override
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home() {
-		return new ModelAndView("redirect:" + "/docs/index.html");
-	}
+	// @Override
+	// @RequestMapping(value = "/", method = RequestMethod.GET)
+	// public ModelAndView home() {
+	// return new ModelAndView("redirect:" + "/docs/index.html");
+	// }
 }

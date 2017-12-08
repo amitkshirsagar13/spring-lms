@@ -6,11 +6,6 @@ jar {
 bootRepackage { enabled = false }
 
 dependencies {
-	compile('org.springframework.cloud:spring-cloud-starter')
-	
-	// hystrix related imports....
-	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
-
 	compile project(':base-service')
 	
     testCompile('org.springframework.boot:spring-boot-starter-test')

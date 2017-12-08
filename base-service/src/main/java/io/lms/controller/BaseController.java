@@ -1,7 +1,9 @@
 package io.lms.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import io.lms.logging.BaseLogger;
 
@@ -27,14 +29,10 @@ import io.lms.logging.BaseLogger;
 
 @RestController
 public class BaseController extends BaseLogger {
-	@RequestMapping("/")
-	public String home() {
-		logInfo("Home Called....");
-		String response = "";
 
-		logInfo("Home Processed....");
-
-		return "Hello Docker World: " + response;
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView home() {
+		return new ModelAndView("redirect:" + "/swagger-ui.html");
 	}
 
 	// @RequestMapping(value = "/api/**", method = RequestMethod.OPTIONS)
@@ -46,4 +44,5 @@ public class BaseController extends BaseLogger {
 	// accept, x-requested-with");
 	// response.addHeader("Access-Control-Max-Age", "3600");
 	// }
+
 }
