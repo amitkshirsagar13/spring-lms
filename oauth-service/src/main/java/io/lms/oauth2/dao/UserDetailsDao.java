@@ -46,6 +46,7 @@ public class UserDetailsDao implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
 		final List<SimpleGrantedAuthority> authorities = Lists.newLinkedList();
 		return db.queryForList(
 				"select * from credentials c " + "  join credentials_authorities ca on c.id = ca.credentials_id "
@@ -55,8 +56,7 @@ public class UserDetailsDao implements UserDetailsService {
 					return user;
 				})
 				.map(user -> new User(user.get("name").asString(), user.get("password").asString(),
-						user.get("enabled").as(Integer.class).toString().equalsIgnoreCase("1"), true, true, true,
-						authorities))
+						user.get("enabled").as(Boolean.class), true, true, true, authorities))
 				.findFirst().orElseThrow(() -> new UsernameNotFoundException(""));
 	}
 
@@ -65,4 +65,5 @@ public class UserDetailsDao implements UserDetailsService {
 		map.forEach((key, val) -> copy.put(UPPER_UNDERSCORE.to(LOWER_CAMEL, key.toLowerCase()), val));
 		return copy;
 	}
+
 }

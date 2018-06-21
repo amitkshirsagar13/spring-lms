@@ -3,13 +3,11 @@ package io.lms.oauth2.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -24,7 +22,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
-import org.sqlite.SQLiteDataSource;
+//import org.sqlite.SQLiteDataSource;
 
 /**
  * <p>
@@ -49,34 +47,29 @@ import org.sqlite.SQLiteDataSource;
 @EnableAuthorizationServer
 @EnableConfigurationProperties
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-	@Value("${security.user.name}")
-	private String userName;
 
-	@Value("${security.user.password}")
-	private String password;
-
-	@Value("${spring.datasource.url}")
-	private String database;
-
-	@Value("${jdbc.driver}")
-	private String driver;
-
-	@Autowired
-	private AuthenticationManager authenticationManager;
+	// @Autowired
+	// private AuthenticationManager authenticationManager;
 
 	@Autowired
 	private Environment environment;
 
-	@Bean
-	public DataSource dataSource() {
-		SQLiteDataSource dataSource = new SQLiteDataSource();
-		dataSource.setUrl(database);
-		return dataSource;
-	}
+	@Autowired
+	private JdbcConfig jdbcConfig;
+
+	@Autowired
+	private DataSource dataSource;
+
+	// @Bean
+	// public DataSource dataSource() {
+	// SQLiteDataSource dataSource = new SQLiteDataSource();
+	// dataSource.setUrl(jdbcConfig.getDatabase());
+	// return dataSource;
+	// }
 
 	@Bean
 	public JdbcClientDetailsService clientDetailsService() {
-		return new JdbcClientDetailsService(dataSource());
+		return new JdbcClientDetailsService(dataSource);
 	}
 
 	@Override
@@ -89,12 +82,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Bean
 	public AuthorizationCodeServices authorizationCodeServices() {
-		return new JdbcAuthorizationCodeServices(dataSource());
+		return new JdbcAuthorizationCodeServices(dataSource);
 	}
 
 	@Bean
 	public ApprovalStore approvalStore() {
-		return new JdbcApprovalStore(dataSource());
+		return new JdbcApprovalStore(dataSource);
 	}
 
 	@Override

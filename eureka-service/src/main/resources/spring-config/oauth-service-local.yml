@@ -27,9 +27,8 @@ keystore:
 
 spring:
   datasource:
-    url: jdbc:sqlite:C:/opt/tokens.db
-    schema: classpath:/sql/schema.sql
+    #url: jdbc:sqlite:C:/opt/tokens.db
+    schema: classpath:/sql/mysql.schema.sql
     data: classpath:/sql/data.sql
     
-jdbc.driver: org.sqlite.JDBC
     

@@ -5,11 +5,13 @@ INSERT INTO authority VALUES (2, 'role_user');
 INSERT INTO credentials VALUES (0, 1, 'oauth_admin', 'admin', 0);
 INSERT INTO credentials VALUES (1, 1, 'resource_admin', 'admin', 0);
 INSERT INTO credentials VALUES (2, 1, 'user', 'user', 0);
-INSERT INTO credentials VALUES (3, 1, 'config', 'admin', 0);
+INSERT INTO credentials VALUES (3, 1, 'config', 'password', 0);
+INSERT INTO credentials VALUES (4, 0, 'disable', 'password', 0);
 INSERT INTO credentials_authorities VALUES (0, 0);
 INSERT INTO credentials_authorities VALUES (1, 1);
 INSERT INTO credentials_authorities VALUES (2, 2);
 INSERT INTO credentials_authorities VALUES (3, 0);
+INSERT INTO credentials_authorities VALUES (4, 0);
 
 INSERT INTO oauth_client_details
     (client_id, resource_ids, client_secret, scope, 
@@ -17,10 +19,12 @@ INSERT INTO oauth_client_details
     access_token_validity, refresh_token_validity, 
     additional_information, autoapprove)
 VALUES
-  ('config', 'config-services', 'password', 
-  'read,write,password,authorization_code,refresh_token','client_credentials', '', 'role_admin', 
-  300, 300, 
-  'something', 'true');
+  ('course', 'course-service', 'password', 
+  'read,write,password,authorization_code,refresh_token','client_credentials', 'http://localhost.shinigami.io:6001/', 'role_admin', 
+  3600, 3600, 
+  null, 'true');
+  
+  
 INSERT INTO oauth_client_details
 (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove)
 VALUES

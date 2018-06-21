@@ -1,7 +1,7 @@
 info:
   component: Hystrix Turbine Dashboard
 server:
-  hostname: localhost
+  hostname: localhost.shinigami.io
   port: 1234
 security:
   basic:
@@ -9,7 +9,8 @@ security:
   user:
     name: hystrix
     password: password
-applications: ZUUL
+applications: COURSE-CATAGORY
 turbine:
-  clusterNameExpression: new String("default")
+  aggregator:
+    clusterConfig: ${applications}
   appConfig: ${applications}

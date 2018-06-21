@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: native
+  application:
+    name: eurekaconfig
+
+server:
+  port: 8761

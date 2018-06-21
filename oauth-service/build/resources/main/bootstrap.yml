@@ -1,8 +1,13 @@
 spring:
-  profiles:
-    active: native
   application:
-    name: eurekaconfig
-
-server:
-  port: 8761
+    name: oauth-service
+  profiles:
+    active: local
+  cloud:
+    config:
+      username: ${VCONFIGUSER:config}
+      password: ${VCONFIGPASSWORD:password}
+      name: ${spring.application.name}
+      label: master
+      profile: local 
+      uri: http://${VCONFIGHOST:${HOSTNAME:localhost.shinigami.io}}:${VCONFIGPORT:8761}/config/

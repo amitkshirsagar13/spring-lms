@@ -6,10 +6,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.lms.oauth2.service.AuthorityRepository;
 
 /**
  * <p>
@@ -34,6 +38,8 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableDiscoveryClient
 @ComponentScan({ "io.lms.oauth2" })
 @RestController
+@EnableJpaRepositories(basePackageClasses = { AuthorityRepository.class })
+@EntityScan({ "io.lms.oauth2" })
 public class OAuth2Server {
 	private static final Log logger = LogFactory.getLog(OAuth2Server.class);
 

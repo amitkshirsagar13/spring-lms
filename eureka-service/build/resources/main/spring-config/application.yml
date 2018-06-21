@@ -5,7 +5,10 @@ spring:
         enabled: true
   user:
     roles: ACTUATOR
-    
+  rabbitmq:
+    host: ${rabbitmq.host:localhost.shinigami.io}
+
+
 oauth_db: jdbc:sqlite:C:/opt/tokens.db
 
 keystore:
@@ -15,7 +18,7 @@ security:
  oauth2:
    resource:
      jwt:
-       keyUri: http://${VCONFIGUSER:config}:${VCONFIGPASSWORD:password}@${VCONFIGHOST:${HOSTNAME:localhost.shinigami.io}}:${VCONFIGPORT:8761}/oauth/token_key
+       keyUri: http://${VOAUTHUSER:oauth2}:${VOAUTHPASSWORD:password}@${VOAUTHHOST:${HOSTNAME:localhost.shinigami.io}}:${VOAUTHPORT:5001}/oauth/token_key
        
 endpoints:
   restart:
@@ -63,6 +66,7 @@ hystrix:
         rollingStats:
           timeInMilliseconds: 10000
           numBuckets: 10
+          
   threadpool:
     default:
       coreSize: 4

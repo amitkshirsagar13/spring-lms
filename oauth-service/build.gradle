@@ -12,12 +12,17 @@ dependencies {
  	compile("org.springframework.security:spring-security-jwt")
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile("com.github.alexheretic:dynamics:1.2")
-	compile("org.xerial:sqlite-jdbc:3.7.2")
+	//compile("org.xerial:sqlite-jdbc:3.7.2")
+	
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile('mysql:mysql-connector-java:8.0.11')
+	
 	
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}")
 	compile("org.thymeleaf:thymeleaf:${thymeleafVersion}")
 	compile("org.thymeleaf:thymeleaf-spring4:${thymeleafVersion}")
-	compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:${thymeleafDialectVersion}")
+	compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.3.0")
 	compile("org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtraVersion}")
 	
 }
