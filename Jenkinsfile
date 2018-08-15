@@ -2,10 +2,12 @@ def label = "jenkins-slave-${UUID.randomUUID().toString()}"
 
 podTemplate(label: label, containers: [
   containerTemplate(name: 'maven', image: 'maven', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'gradle', image: 'gradle:3.4-jdk8', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),  
+  containerTemplate(name: 'gradle', image: 'gradle:3.4-jdk8', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:latest', command: 'cat', ttyEnabled: true),
-  containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true)
+  containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'jenkins-k8s-job-builder', image: 'amitkshirsagar13/jenkins-k8s-job-builder:latest', 
+  workingDir: '/home/jenkins', command: 'cat', ttyEnabled: true)
 ],
 volumes: [
     hostPathVolume(mountPath: '/home/jenkins/.gradle', hostPath: '/data/jenkins-gradle/.gradle'),
