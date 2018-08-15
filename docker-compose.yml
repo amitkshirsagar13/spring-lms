@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3'
 services:
   mongo:
     image: mongo:latest
@@ -14,7 +14,8 @@ services:
       mongo:
         condition: service_started
   eureka:
-    image: microdocker/eureka-service:latest
+    build: ./docker/eureka-service
+    image: amitkshirsagar13/eureka-service:latest
     restart: on-failure:7
     hostname: localeureka
     ports:
@@ -27,7 +28,8 @@ services:
     volumes:
       - /shared/eureka:/tmp
   zuul:
-    image: microdocker/zuul-service:latest
+    build: ./docker/eureka-service
+    image: amitkshirsagar13/zuul-service:latest
     restart: on-failure:7
     hostname: localzuul
     ports:
@@ -46,7 +48,8 @@ services:
     volumes:
       - /shared/transform:/tmp
   transform:
-    image: microdocker/transform-service:latest
+    build: ./docker/eureka-service
+    image: amitkshirsagar13/transform-service:latest
     restart: on-failure:7
     hostname: localtransform
     ports:
@@ -68,7 +71,8 @@ services:
     volumes:
     - /shared/transform:/tmp
   webhook:
-    image: microdocker/webhook-service:latest
+    build: ./docker/eureka-service
+    image: amitkshirsagar13/webhook-service:latest
     restart: on-failure:7
     hostname: localwebhook
     ports:
@@ -90,7 +94,8 @@ services:
     volumes:
       - /shared/webhook:/tmp
   hystrix:
-    image: microdocker/hystrix-service:latest
+    build: ./docker/eureka-service
+    image: amitkshirsagar13/hystrix-service:latest
     restart: on-failure:7
     hostname: localhystrix
     ports:
