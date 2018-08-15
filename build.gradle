@@ -1,9 +1,14 @@
 buildscript {
 	repositories {
+		mavenLocal()
 		mavenCentral()
-		maven { url "https://repo.spring.io/milestone" }
+		maven {
+			url "https://repo.spring.io/milestone"
+			url "https://plugins.gradle.org/m2/"
+		}
 	}
 	dependencies {
+		classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2"
 		classpath "io.spring.gradle:dependency-management-plugin:springGradleDependancyManager"
 		classpath('se.transmode.gradle:gradle-docker:1.2')
 		classpath 'com.bmuschko:gradle-docker-plugin:3.2.1'
@@ -13,6 +18,8 @@ buildscript {
 }
 
 apply plugin: com.bmuschko.gradle.docker.DockerRemoteApiPlugin
+apply plugin: org.sonarqube
+
 // import task classes
 import com.bmuschko.gradle.docker.tasks.image.*
 
@@ -21,7 +28,10 @@ allprojects {
 	repositories { 
 		mavenLocal()
 		mavenCentral()
-		maven { url "https://repo.spring.io/milestone" }
+		maven {
+			url "https://repo.spring.io/milestone"
+			url "https://plugins.gradle.org/m2/"
+		}
 	}
 	
 	apply plugin: "io.spring.dependency-management"
