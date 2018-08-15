@@ -41,6 +41,12 @@ allprojects {
 			mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudDependencies}")
 		}
 	}
+	sonarqube {
+		properties {
+			property "sonar.projectName", "spring-lms"
+		}
+	}
+}
 
 }
 subprojects {
