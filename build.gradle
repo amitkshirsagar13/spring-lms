@@ -48,7 +48,6 @@ allprojects {
 	}
 }
 
-}
 subprojects {
 	
 	apply plugin: 'org.springframework.boot'
