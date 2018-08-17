@@ -8,6 +8,14 @@
   <packaging>pom</packaging>
   <name>spring-lms</name>
   <modules>
-    <module>base</module>
+    <module>base-service</module>
+    <module>course-catagory</module>
+    <module>data-service</module>
+    <module>eureka-service</module>
+    <module>hystrix-service</module>
+    <module>oauth-service</module>
+    <module>turbine-service</module>
+    <module>zuul-service</module>
   </modules>
+  
 </project>
